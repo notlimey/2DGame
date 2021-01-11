@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
 {
     public InputField saveName;
     public string profileName;
+    public string[] saveFiles;
 
     public void CreateNewGame()
     {
@@ -15,14 +16,23 @@ public class GameManager : MonoBehaviour
         SerializationManager.Save(saveName.text, profileName);
     }
 
-    public string[] saveFiles;
-    public void GetLoadFiles()
+    private void Start()
+    {
+        Load();
+    }
+
+
+    public void Load()
     {
         if (!Directory.Exists(Application.persistentDataPath + "/saves/"))
         {
             Directory.CreateDirectory(Application.persistentDataPath + "/saves/");
         }
 
-        saveFiles = Directory.GetFiles(Application.persistentDataPath + "/saves/");
+        saveFiles = Directory.GetDirectories(Application.persistentDataPath + "/saves/");
+        foreach(var files in saveFiles)
+        {
+            Debug.Log(files);
+        }
     }
 }

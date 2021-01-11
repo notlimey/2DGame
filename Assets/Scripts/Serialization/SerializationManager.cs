@@ -14,8 +14,12 @@ public class SerializationManager
         {
             Directory.CreateDirectory(Application.persistentDataPath + "/saves");
         }
+        if(!Directory.Exists(Application.persistentDataPath + "/saves/" + saveName ))
+        {
+            Directory.CreateDirectory(Application.persistentDataPath + "/saves/" + saveName);
+        }
 
-        string path = Application.persistentDataPath + "/saves/" + saveName + ".dat";
+        string path = Application.persistentDataPath + "/saves/" + saveName+ "/" + saveName + ".dat";
 
         FileStream file = File.Create(path);
 
