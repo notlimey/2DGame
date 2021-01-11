@@ -6,33 +6,39 @@ using UnityEngine;
 
 public class SerializationManager
 {
-    public static bool Save(string saveName, string profileName)
+    public static bool Save(PlayerProfile player, bool saveExists)
     {
+        if (Directory.Exists(Application.persistentDataPath + "/saves/" + player.playerName) && saveExists)
+        {
+            return false;
+        }
+
         BinaryFormatter formatter = GetBinaryFormatter();
+
 
         if(!Directory.Exists(Application.persistentDataPath + "/saves"))
         {
             Directory.CreateDirectory(Application.persistentDataPath + "/saves");
         }
-        if(!Directory.Exists(Application.persistentDataPath + "/saves/" + saveName ))
+        if(!Directory.Exists(Application.persistentDataPath + "/saves/" + player.playerName ))
         {
-            Directory.CreateDirectory(Application.persistentDataPath + "/saves/" + saveName);
+            Directory.CreateDirectory(Application.persistentDataPath + "/saves/" + player.playerName);
         }
 
-        string path = Application.persistentDataPath + "/saves/" + saveName+ "/" + saveName + ".dat";
+        string path = Application.persistentDataPath + "/saves/" + player.playerName + "/" + player.playerName + ".dat";
 
         FileStream file = File.Create(path);
 
-        formatter.Serialize(file, profileName);
+        formatter.Serialize(file, player);
 
         file.Close();
 
-        Debug.Log("Succes");
+        Debug.Log("Success");
 
         return true;
     }
 
-    public static object Load(string path)
+    public static PlayerProfile Load(string path)
     {
         if (!File.Exists(path))
         {
@@ -45,7 +51,7 @@ public class SerializationManager
 
         try
         {
-            object save = formatter.Deserialize(file);
+            PlayerProfile save = (PlayerProfile)formatter.Deserialize(file);
             file.Close();
             return save;
         }

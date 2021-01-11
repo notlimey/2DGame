@@ -7,17 +7,27 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     public InputField saveName;
-    public string profileName;
     public string[] saveFiles;
+    public GameObject saveExists;
+
+    [SerializeField]
+    private GameObject buttonTemplate;
 
     public void CreateNewGame()
     {
-        profileName = saveName.text;
-        SerializationManager.Save(saveName.text, profileName);
+        var complete = SerializationManager.Save(new PlayerProfile { playerName = saveName.text }, true);
+        if (!complete)
+        {
+            saveExists.SetActive(true);
+        }else
+        {
+            saveExists.SetActive(false);
+        }
     }
 
     private void Start()
     {
+        saveExists.SetActive(false);
         Load();
     }
 
@@ -30,9 +40,22 @@ public class GameManager : MonoBehaviour
         }
 
         saveFiles = Directory.GetDirectories(Application.persistentDataPath + "/saves/");
-        foreach(var files in saveFiles)
+        foreach(var path in saveFiles)
         {
-            Debug.Log(files);
+            var files = Directory.GetFiles(path);
+            foreach(var file in files)
+            {
+                var player = SerializationManager.Load(file);
+                Debug.Log(player.playerName);
+
+                GameObject button = Instantiate(buttonTemplate) as GameObject;
+                button.SetActive(true);
+
+                button.GetComponent<SavesListButton>().SetText(player.playerName);
+
+                button.transform.SetParent(buttonTemplate.transform.parent, false);
+            }
         }
     }
 }
+
