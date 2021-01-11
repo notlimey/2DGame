@@ -1,13 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.Serialization.Formatters.Binary;
+﻿using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 using UnityEngine;
+using System.Runtime.Serialization;
 
 public class SerializationManager
 {
-    public static bool Save(PlayerProfile player, bool saveExists)
+
+    public static bool Save(PlayerProfile player, PlayerData data, bool saveExists)
     {
+
         if (Directory.Exists(Application.persistentDataPath + "/saves/" + player.playerName) && saveExists)
         {
             return false;
@@ -32,8 +33,6 @@ public class SerializationManager
         formatter.Serialize(file, player);
 
         file.Close();
-
-        Debug.Log("Success");
 
         return true;
     }

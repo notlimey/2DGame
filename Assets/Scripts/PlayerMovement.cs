@@ -17,9 +17,6 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 change;
     private Animator animator;
 
-
-
-
     void Start()
     {
         currentState = PlayerState.walk;

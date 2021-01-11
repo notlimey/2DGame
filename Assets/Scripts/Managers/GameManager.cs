@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
 
     public void CreateNewGame()
     {
-        var complete = SerializationManager.Save(new PlayerProfile { playerName = saveName.text }, true);
+        var complete = SerializationManager.Save(new PlayerProfile { playerName = saveName.text }, StaticClasses.Data.position, true);
         if (!complete)
         {
             saveExists.SetActive(true);
@@ -46,7 +46,6 @@ public class GameManager : MonoBehaviour
             foreach(var file in files)
             {
                 var player = SerializationManager.Load(file);
-                Debug.Log(player.playerName);
 
                 GameObject button = Instantiate(buttonTemplate) as GameObject;
                 button.SetActive(true);

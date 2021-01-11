@@ -12,6 +12,6 @@ EditorBuildSettings:
     path: Assets/Scenes/SelectOrCreateSave.unity
     guid: ab10b90a44a71444d9b910a15c4cb898
   - enabled: 1
-    path: Assets/Scenes/StarterSpot.unity
+    path: Assets/Scenes/Spawn.unity
     guid: 3d84a3296640d98458d546dd72176e0e
   m_configObjects: {}
