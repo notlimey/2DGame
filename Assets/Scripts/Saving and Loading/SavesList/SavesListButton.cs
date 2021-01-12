@@ -6,20 +6,18 @@ using UnityEngine.UI;
 
 public class SavesListButton : MonoBehaviour
 {
-    [SerializeField]
-    private Text myText;
-
+    public Button btn;
+    
     public void SetText(string textString)
     {
-        myText.text = textString;
+        textString = Player.Username;
     }
 
     public void OnClick()
     {
-        string name = myText.text;
-        string path = Application.persistentDataPath + "/saves/" + name + "/" + name + ".dat";
-        var player = SerializationManager.Load(path);
-        StaticClasses.Player = player;
+        string Name = Player.Username;
+        string path = Application.persistentDataPath + "/saves/" + Name + "/" + Name + ".dat";
+        var player = SerializationManager.LoadPlayer(path);
         SceneManager.LoadSceneAsync(2);
     }
 }

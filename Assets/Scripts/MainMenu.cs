@@ -1,32 +1,33 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class MainMenu : MonoBehaviour
+namespace Assets.Scripts
 {
-    public void Mainmenu()
+    public class MainMenu : MonoBehaviour
     {
-        SceneManager.LoadScene(0);
-    }
-    public void SelectOrCreateSave ()
-    {
-        SceneManager.LoadScene(1);
-    }
+        public void Mainmenu()
+        {
+            SceneManager.LoadScene(0);
+        }
+        public void SelectOrCreateSave ()
+        {
+            SceneManager.LoadScene(1);
+        }
 
-    public void LoadGame()
-    {
-        SceneManager.LoadScene(2);
-    }
+        public void LoadGame()
+        {
+            SceneManager.LoadScene(2);
+        }
 
-    public void StarterSpot()
-    {
-        SceneManager.LoadScene(3);
-    }
+        public void StarterSpot()
+        {
+            SceneManager.LoadScene(3);
+        }
 
-    public void QuitGame()
-    {
-        Application.Quit();
-        Debug.Log("Quitting Game");
+        public void QuitGame()
+        {
+            Application.Quit();
+            Debug.Log("Quitting Game");
+        }
     }
 }

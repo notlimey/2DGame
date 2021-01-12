@@ -1,43 +1,39 @@
-﻿using System.Runtime.Serialization.Formatters.Binary;
+﻿using Assets.Scripts.Saving_and_Loading;
 using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
-using System.Runtime.Serialization;
 
-public class SerializationManager
+public static class SerializationManager
 {
 
-    public static bool Save(PlayerProfile player, PlayerData data, bool saveExists)
+    public static void SavePlayer(Player player)
     {
-
-        if (Directory.Exists(Application.persistentDataPath + "/saves/" + player.playerName) && saveExists)
+        if (!Directory.Exists(Application.persistentDataPath + "/saves/"))
         {
-            return false;
+            Directory.CreateDirectory(Application.persistentDataPath + "/saves/");
+        }
+        if (Directory.Exists(Application.persistentDataPath + "/saves/" + Player.Username + "/"))
+        {
+            Debug.LogError(" - File already exists");
+            return;
+        }
+        else
+        {
+            Directory.CreateDirectory(Application.persistentDataPath + "/saves/" + Player.Username + "/");
         }
 
-        BinaryFormatter formatter = GetBinaryFormatter();
+        
+        BinaryFormatter formatter = new BinaryFormatter();
+        string path = Application.persistentDataPath + "/saves/" + Player.Username + "/" + Player.Username + ".dat";
+        FileStream stream = new FileStream(path, FileMode.Create);
 
+        PlayerProfile data = new PlayerProfile(player);
 
-        if(!Directory.Exists(Application.persistentDataPath + "/saves"))
-        {
-            Directory.CreateDirectory(Application.persistentDataPath + "/saves");
-        }
-        if(!Directory.Exists(Application.persistentDataPath + "/saves/" + player.playerName ))
-        {
-            Directory.CreateDirectory(Application.persistentDataPath + "/saves/" + player.playerName);
-        }
-
-        string path = Application.persistentDataPath + "/saves/" + player.playerName + "/" + player.playerName + ".dat";
-
-        FileStream file = File.Create(path);
-
-        formatter.Serialize(file, player);
-
-        file.Close();
-
-        return true;
+        formatter.Serialize(stream, data);
+        stream.Close();
     }
 
-    public static PlayerProfile Load(string path)
+    public static PlayerProfile LoadPlayer(string path)
     {
         if (!File.Exists(path))
         {

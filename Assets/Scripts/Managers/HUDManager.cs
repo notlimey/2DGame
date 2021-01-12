@@ -11,13 +11,6 @@ public class HUDManager : MonoBehaviour
 
     void Start()
     {
-        userName.text = StaticClasses.Player.playerName;
-        Debug.Log(StaticClasses.Player.playerName);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        userName.text = Player.Username;
     }
 }

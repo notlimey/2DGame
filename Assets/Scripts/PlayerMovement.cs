@@ -11,15 +11,15 @@ public enum PlayerState
 
 public class PlayerMovement : MonoBehaviour
 {
-    public PlayerState currentState;
-    public float speed;
+    public PlayerState CurrentState;
+    public float Speed;
     private Rigidbody2D myRigidbody;
     private Vector3 change;
     private Animator animator;
 
     void Start()
     {
-        currentState = PlayerState.walk;
+        CurrentState = PlayerState.walk;
         animator = GetComponent<Animator>();
         myRigidbody = GetComponent<Rigidbody2D>();
         animator.SetFloat("moveX", 0);
@@ -31,11 +31,11 @@ public class PlayerMovement : MonoBehaviour
         change = Vector3.zero;
         change.x = Input.GetAxisRaw("Horizontal");
         change.y = Input.GetAxisRaw("Vertical");
-        if(Input.GetButtonDown("attack") && currentState != PlayerState.attack && !PauseManager.isPaused)
+        if(Input.GetButtonDown("attack") && CurrentState != PlayerState.attack && !PauseManager.isPaused)
         {
             StartCoroutine(AttackCo());
         }
-        else if (currentState == PlayerState.walk)
+        else if (CurrentState == PlayerState.walk)
         {
             UpdateAnimationAndMove();
         }
@@ -44,11 +44,11 @@ public class PlayerMovement : MonoBehaviour
     private IEnumerator AttackCo()
     {
         animator.SetBool("attacking", true);
-        currentState = PlayerState.attack;
+        CurrentState = PlayerState.attack;
         yield return null;
         animator.SetBool("attacking", false);
         yield return new WaitForSeconds(.3f);
-        currentState = PlayerState.walk;
+        CurrentState = PlayerState.walk;
     }
 
     public void UpdateAnimationAndMove()
@@ -70,7 +70,7 @@ public class PlayerMovement : MonoBehaviour
     {
         change.Normalize();
         myRigidbody.MovePosition(
-            transform.position + change * speed * Time.deltaTime);
+            transform.position + change * Speed * Time.deltaTime);
     }
 
 

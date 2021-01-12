@@ -1,33 +1,24 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.IO;
+using Assets.Scripts.Saving_and_Loading;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    public InputField saveName;
-    public string[] saveFiles;
-    public GameObject saveExists;
+    public InputField SaveName;
+    public string[] SaveFiles;
 
     [SerializeField]
-    private GameObject buttonTemplate;
+    private GameObject _buttonTemplate;
 
     public void CreateNewGame()
     {
-        var complete = SerializationManager.Save(new PlayerProfile { playerName = saveName.text }, StaticClasses.Data.position, true);
-        if (!complete)
-        {
-            saveExists.SetActive(true);
-        }else
-        {
-            saveExists.SetActive(false);
-        }
+        Player.Username = SaveName.text;
+        SerializationManager.SavePlayer(new Player());
     }
 
     private void Start()
     {
-        saveExists.SetActive(false);
         Load();
     }
 
@@ -39,20 +30,20 @@ public class GameManager : MonoBehaviour
             Directory.CreateDirectory(Application.persistentDataPath + "/saves/");
         }
 
-        saveFiles = Directory.GetDirectories(Application.persistentDataPath + "/saves/");
-        foreach(var path in saveFiles)
+        SaveFiles = Directory.GetDirectories(Application.persistentDataPath + "/saves/");
+        foreach (var path in SaveFiles)
         {
             var files = Directory.GetFiles(path);
-            foreach(var file in files)
+            foreach (var file in files)
             {
-                var player = SerializationManager.Load(file);
+                var player = SerializationManager.LoadPlayer(path);
 
-                GameObject button = Instantiate(buttonTemplate) as GameObject;
+                GameObject button = Instantiate(_buttonTemplate) as GameObject;
                 button.SetActive(true);
 
-                button.GetComponent<SavesListButton>().SetText(player.playerName);
+                button.GetComponent<SavesListButton>().SetText(file);
 
-                button.transform.SetParent(buttonTemplate.transform.parent, false);
+                button.transform.SetParent(_buttonTemplate.transform.parent, false);
             }
         }
     }
