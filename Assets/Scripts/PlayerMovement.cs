@@ -71,6 +71,7 @@ public class PlayerMovement : MonoBehaviour
         change.Normalize();
         myRigidbody.MovePosition(
             transform.position + change * Speed * Time.deltaTime);
+                
     }
 
 

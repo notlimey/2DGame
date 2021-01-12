@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
     public void CreateNewGame()
     {
         Player.Username = SaveName.text;
-        SerializationManager.SavePlayer(new Player());
+        SerializationManager.SavePlayer(new Player(), true);
     }
 
     private void Start()

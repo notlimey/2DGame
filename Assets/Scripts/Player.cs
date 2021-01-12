@@ -20,7 +20,7 @@ public class Player : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(5);
-            SerializationManager.SavePlayer(this);
+            SerializationManager.SavePlayer(this, false);
             Debug.Log("Auto-saving...");
         }
     }
@@ -36,5 +36,6 @@ public class Player : MonoBehaviour
         position.z = data.Position[2];
 
         transform.position = position;
+        
     }
 }

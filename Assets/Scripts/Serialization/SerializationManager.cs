@@ -6,13 +6,13 @@ using UnityEngine;
 public static class SerializationManager
 {
 
-    public static void SavePlayer(Player player)
+    public static void SavePlayer(Player player, bool saveExists)
     {
         if (!Directory.Exists(Application.persistentDataPath + "/saves/"))
         {
             Directory.CreateDirectory(Application.persistentDataPath + "/saves/");
         }
-        if (Directory.Exists(Application.persistentDataPath + "/saves/" + Player.Username + "/"))
+        if (saveExists == true)
         {
             Debug.LogError(" - File already exists");
             return;
