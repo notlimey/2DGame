@@ -230,7 +230,7 @@ RectTransform:
   - {fileID: 673578236}
   - {fileID: 903439501}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -496,7 +496,7 @@ Transform:
   m_LocalScale: {x: 0.53065014, y: 0.53065014, z: 0.53065014}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &207532618
 BoxCollider2D:
@@ -564,7 +564,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 300, y: 206.4}
+  m_AnchoredPosition: {x: 287.90005, y: 195.00003}
   m_SizeDelta: {x: 37.725418, y: 37.725418}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &296843083
@@ -1036,7 +1036,7 @@ PrefabInstance:
     - target: {fileID: -6048608667122883049, guid: 318b09892ae32004d97aad3f7503fa31,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -6048608667122883049, guid: 318b09892ae32004d97aad3f7503fa31,
         type: 3}
@@ -1125,7 +1125,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 326, y: 206.4}
+  m_AnchoredPosition: {x: 313.90005, y: 195.00003}
   m_SizeDelta: {x: 37.725418, y: 37.725418}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &529454126
@@ -1199,7 +1199,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 381.1, y: 206.4}
+  m_AnchoredPosition: {x: 369, y: 195}
   m_SizeDelta: {x: 37.725418, y: 37.725418}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &554382880
@@ -1830,7 +1830,7 @@ Transform:
   m_Children:
   - {fileID: 187923440}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1291333996
 BoxCollider2D:
@@ -2162,7 +2162,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -293, y: 199}
+  m_AnchoredPosition: {x: -289, y: 199}
   m_SizeDelta: {x: 201.34302, y: 32.540985}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1424579154
@@ -2527,7 +2527,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 354, y: 206.4}
+  m_AnchoredPosition: {x: 341.90005, y: 195.00003}
   m_SizeDelta: {x: 37.725418, y: 37.725418}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1780624240
@@ -2567,36 +2567,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1780624238}
   m_CullTransparentMesh: 0
---- !u!1 &1810722409
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1810722410}
-  m_Layer: 0
-  m_Name: TeleportPlayer
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1810722410
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1810722409}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.4668288, y: 0.63514155, z: -319.68564}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1882388425
 GameObject:
   m_ObjectHideFlags: 0
@@ -2703,7 +2673,7 @@ RectTransform:
   m_Children:
   - {fileID: 149904446}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -2906,6 +2876,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 7012365369306406094, guid: 17286aebc283560408c7507fc6459d79,
+        type: 3}
+      propertyPath: Speed
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7012365369306406083, guid: 17286aebc283560408c7507fc6459d79, type: 3}

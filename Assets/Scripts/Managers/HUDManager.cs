@@ -11,6 +11,6 @@ public class HUDManager : MonoBehaviour
 
     void Start()
     {
-        userName.text = Player.Username;
+        userName.text = SelectedProfile.Username;
     }
 }

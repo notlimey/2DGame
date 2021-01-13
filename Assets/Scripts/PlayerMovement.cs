@@ -12,7 +12,7 @@ public enum PlayerState
 public class PlayerMovement : MonoBehaviour
 {
     public PlayerState CurrentState;
-    public float Speed;
+    public float Speed = 5f;
     private Rigidbody2D myRigidbody;
     private Vector3 change;
     private Animator animator;

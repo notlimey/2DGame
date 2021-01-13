@@ -6,7 +6,7 @@ using UnityEngine;
 public static class SerializationManager
 {
 
-    public static void SavePlayer(Player player, bool saveExists)
+    public static void SavePlayer(PlayerProfile player, bool saveExists)
     {
         if (!Directory.Exists(Application.persistentDataPath + "/saves/"))
         {
@@ -19,17 +19,16 @@ public static class SerializationManager
         }
         else
         {
-            Directory.CreateDirectory(Application.persistentDataPath + "/saves/" + Player.Username + "/");
+            Directory.CreateDirectory(Application.persistentDataPath + "/saves/" + player.PlayerName + "/");
         }
 
         
+
         BinaryFormatter formatter = new BinaryFormatter();
-        string path = Application.persistentDataPath + "/saves/" + Player.Username + "/" + Player.Username + ".dat";
+        string path = Application.persistentDataPath + "/saves/" + player.PlayerName + "/" + player.PlayerName + ".dat";
         FileStream stream = new FileStream(path, FileMode.Create);
 
-        PlayerProfile data = new PlayerProfile(player);
-
-        formatter.Serialize(stream, data);
+        formatter.Serialize(stream, player);
         stream.Close();
     }
 
@@ -43,6 +42,8 @@ public static class SerializationManager
         BinaryFormatter formatter = GetBinaryFormatter();
 
         FileStream file = File.Open(path, FileMode.Open);
+
+        
 
         try
         {

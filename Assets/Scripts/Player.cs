@@ -6,13 +6,14 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
 
-    public static string Username;
-
     void Start()
     {
+        LoadMyPlayer();
         StartCoroutine(AutoSave());
-        LoadPlayer();
     }
+
+    float[] PlayerPosition = new float[3];
+
 
 
     IEnumerator AutoSave()
@@ -20,22 +21,28 @@ public class Player : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(5);
-            SerializationManager.SavePlayer(this, false);
+            PlayerPosition[0] = transform.position.x;
+            PlayerPosition[1] = transform.position.y;
+            PlayerPosition[2] = transform.position.z;
+            SerializationManager.SavePlayer(new PlayerProfile { PlayerName = SelectedProfile.Username, Position = PlayerPosition}, false);
+            Debug.Log(SelectedProfile.Username);
             Debug.Log("Auto-saving...");
         }
     }
 
-    public void LoadPlayer()
+    public void LoadMyPlayer()
     {
-        string path = Application.persistentDataPath + "/saves/" + Username + "/" + Username + ".dat";
+        string path = Application.persistentDataPath + "/saves/" + SelectedProfile.Username + "/" + SelectedProfile.Username + ".dat";
         PlayerProfile data = SerializationManager.LoadPlayer(path);
 
-        Vector3 position;
-        position.x = data.Position[0];
-        position.y = data.Position[1];
-        position.z = data.Position[2];
+        if (data.Position != null)
+        {
+            Vector3 position;
+            position.x = data.Position[0];
+            position.y = data.Position[1];
+            position.z = data.Position[2];
 
-        transform.position = position;
-        
+            transform.position = position;
+        }
     }
 }
