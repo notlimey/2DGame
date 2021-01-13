@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Collections;
 using Assets.Scripts.Saving_and_Loading;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,14 +10,38 @@ public class GameManager : MonoBehaviour
 {
     public InputField SaveName;
     public string[] SaveFiles;
-    public GameObject _saveExists;
     public bool SaveExists = false;
+
+    // SaveName Errors
+    public GameObject ContainsBackSlash;
+    public GameObject Slash;
+    public GameObject _saveExists;
+
+    //canvases
+    public GameObject NewGame;
+    public GameObject SelectOrCreate;
+    public GameObject LoadGame;
+
 
     [SerializeField]
     private GameObject _buttonTemplate;
 
     public void CreateNewGame()
     {
+        if (SaveName.text.Contains("\\"))
+        {
+            ContainsBackSlash.SetActive(true);
+            StartCoroutine(ReloadAfterSec());
+            return;
+
+        }
+        if (SaveName.text.Contains("/"))
+        {
+            Slash.SetActive(true);
+            StartCoroutine(ReloadAfterSec());
+            return;
+        }
+
         if (Directory.Exists(Application.persistentDataPath + "/saves/" + SaveName.text))
         {
             Debug.Log("Save Exists");
@@ -23,7 +49,19 @@ public class GameManager : MonoBehaviour
             SaveExistsImage();
             return;
         }
-        SerializationManager.SavePlayer(new PlayerProfile { PlayerName = SaveName.text }, false);
+        SaveSystem.SavePlayer(new PlayerProfile { PlayerName = SaveName.text }, false);
+        NewGame.SetActive(false);
+        LoadGame.SetActive(false);
+        SelectOrCreate.SetActive(true);
+       
+    }
+
+    public void Update()
+    {
+        if (Input.GetButtonDown("Submit"))
+        {
+            CreateNewGame();
+        }
     }
 
     public void SaveExistsImage()
@@ -34,9 +72,18 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void reload()
+    public void Reload()
     {
         SaveExists = false;
+        ContainsBackSlash.SetActive(false);
+        Slash.SetActive(false);
+        SaveName.text = "";
+    }
+
+    IEnumerator ReloadAfterSec()
+    {
+        yield return new WaitForSeconds(5);
+        Reload();
     }
 
 
@@ -57,7 +104,7 @@ public class GameManager : MonoBehaviour
             foreach (var file in files)
             {
                 
-                var player = SerializationManager.LoadPlayer(file);
+                var player = SaveSystem.LoadPlayer(file);
                 if (!AllSaves.Exists(p => p.PlayerName.Equals(player.PlayerName, System.StringComparison.OrdinalIgnoreCase)))
                 {
                     AllSaves.Add(player);

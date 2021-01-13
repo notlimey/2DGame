@@ -17,7 +17,7 @@ public class SavesListButton : MonoBehaviour
         string Name = gameObject.GetComponentInChildren<Text>().text;
         SelectedProfile.Username = Name;
         string path = Application.persistentDataPath + "/saves/" + Name + "/" + Name + ".dat";
-        var player = SerializationManager.LoadPlayer(path);
+        SaveSystem.LoadPlayer(path);
         SceneManager.LoadSceneAsync(2);
     }
 
