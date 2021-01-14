@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+
+    [SerializeField] private UI_Inventory uiInventory;
+
+    private Inventory inventory;
     void Start()
     {
         LoadMyPlayer();
@@ -11,6 +15,24 @@ public class Player : MonoBehaviour
     }
 
     float[] PlayerPosition = new float[3];
+
+    private void Awake()
+    {
+        inventory = new Inventory();
+        uiInventory.SetInventory(inventory);
+        
+    }
+
+    private void OnTriggerEnter2D(Collider2D Collider)
+    {
+        ItemWorld itemWorld = Collider.GetComponent<ItemWorld>();
+        if (itemWorld != null)
+        {
+            //Touch item
+            inventory.AddItem(itemWorld.GetItem());
+            itemWorld.DestroySelf();
+        }
+    }
 
     IEnumerator AutoSave()
     {
@@ -21,8 +43,6 @@ public class Player : MonoBehaviour
             PlayerPosition[1] = transform.position.y;
             PlayerPosition[2] = transform.position.z;
             SaveSystem.SavePlayer(new PlayerProfile { PlayerName = SelectedProfile.Username, Position = PlayerPosition}, false);
-            Debug.Log(SelectedProfile.Username);
-            Debug.Log("Auto-saving...");
         }
     }
 

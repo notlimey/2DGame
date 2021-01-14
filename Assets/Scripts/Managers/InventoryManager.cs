@@ -8,7 +8,7 @@ public class InventoryManager : MonoBehaviour
 {
     public GameObject Inventory;
     public TMP_Text InventoryPlayerName;
-    public bool InventoryActive;
+    public static bool InventoryActive;
 
     public void Start()
     {
@@ -25,16 +25,20 @@ public class InventoryManager : MonoBehaviour
 
     public void OpenCloseInventory()
     {
-        InventoryActive = !InventoryActive;
-        if (InventoryActive)
+        if (!PauseManager.GameIsPaused)
         {
-            Inventory.SetActive(true);
-            Time.timeScale = 0f;
+            InventoryActive = !InventoryActive;
+            if (InventoryActive)
+            {
+                Inventory.SetActive(true);
+                Time.timeScale = 0f;
+            }
+            else
+            {
+                Inventory.SetActive(false);
+                Time.timeScale = 1f;
+            }
         }
-        else
-        {
-            Inventory.SetActive(false);
-            Time.timeScale = 1f;
-        }
+        else return;
     }
 }
