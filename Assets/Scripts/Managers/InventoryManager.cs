@@ -13,6 +13,7 @@ public class InventoryManager : MonoBehaviour
     public void Start()
     {
         InventoryPlayerName.text = SelectedProfile.Username;
+        Inventory.SetActive(false);
     }
 
     public void Update()

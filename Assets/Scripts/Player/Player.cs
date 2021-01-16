@@ -23,9 +23,9 @@ public class Player : MonoBehaviour
         
     }
 
-    private void OnTriggerEnter2D(Collider2D Collider)
+    private void OnTriggerEnter2D(Collider2D boxCollider)
     {
-        ItemWorld itemWorld = Collider.GetComponent<ItemWorld>();
+        ItemWorld itemWorld = boxCollider.GetComponent<ItemWorld>();
         if (itemWorld != null)
         {
             //Touch item

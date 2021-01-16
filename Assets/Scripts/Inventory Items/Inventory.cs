@@ -18,21 +18,24 @@ public class Inventory
     {
         if (item.IsStackable())
         {
-            bool itemAlreadyInInventory = false;
+        bool itemAlreadyInInventory = false;
             foreach (Item inventoryItem in itemList)
             {
                 if (inventoryItem.itemType == item.itemType)
                 {
                     inventoryItem.amount += item.amount;
                     itemAlreadyInInventory = true;
+                    Debug.Log("Item = more than 1");
                 }
 
                 if (!itemAlreadyInInventory)
                 {
                     itemList.Add(item);
+
                 }
             }
-        }else
+
+        } else
         {
             itemList.Add(item);
         }

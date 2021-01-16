@@ -13,6 +13,7 @@ public class Item
         Shovel,
         Sword,
         Stone,
+        Wood,
     }
 
     public ItemType itemType;
@@ -38,12 +39,14 @@ public class Item
         {
             default:
             case ItemType.Stone:
+            case ItemType.Wood:
                 return true;
             case ItemType.Axe:
             case ItemType.Shovel:
             case ItemType.Sword:
             case ItemType.Pickaxe:
                 return false;
+            
         }
     }
     
