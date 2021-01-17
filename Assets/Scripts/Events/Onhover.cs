@@ -1,19 +1,17 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.UI;
+﻿using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class Onhover : MonoBehaviour
+public class Onhover : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    public UnityEvent OnHover = new UnityEvent();
-    public void Start()
+    public GameObject button;
+    
+    public void OnPointerEnter(PointerEventData eventData)
     {
-        OnHover.AddListener(Grow);
+        button.transform.localScale = new Vector3(1.1f, 1.1f, 1.1f);
     }
-
-    public void Grow()
+    
+    public void OnPointerExit(PointerEventData eventData)
     {
-        Debug.Log("HeiHei");
+        button.transform.localScale = new Vector3(1f, 1f, 1f);
     }
 }

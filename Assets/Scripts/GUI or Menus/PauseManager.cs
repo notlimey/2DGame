@@ -36,23 +36,19 @@ public class PauseManager : MonoBehaviour
     //Changing if the game is paused or not
     public void ChangePause()
     {
-        if (!InventoryManager.InventoryActive)
+        GameIsPaused = !GameIsPaused;
+        if (GameIsPaused)
         {
-            GameIsPaused = !GameIsPaused;
-            if (GameIsPaused)
-            {
-                PausePanel.SetActive(true);
-                HUD.SetActive(false);
-                Time.timeScale = 0f;
-            }
-            else
-            {
-                PausePanel.SetActive(false);
-                HUD.SetActive(true);
-                Time.timeScale = 1f;
-            }
+            PausePanel.SetActive(true);
+            HUD.SetActive(false);
+            Time.timeScale = 0f;
         }
-        else return;
+        else
+        {
+            PausePanel.SetActive(false);
+            HUD.SetActive(true);
+            Time.timeScale = 1f;
+        }
     }
 
 

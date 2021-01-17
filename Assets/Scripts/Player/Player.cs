@@ -4,10 +4,6 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-
-    [SerializeField] private UI_Inventory uiInventory;
-
-    private Inventory inventory;
     void Start()
     {
         LoadMyPlayer();
@@ -15,24 +11,6 @@ public class Player : MonoBehaviour
     }
 
     float[] PlayerPosition = new float[3];
-
-    private void Awake()
-    {
-        inventory = new Inventory();
-        uiInventory.SetInventory(inventory);
-        
-    }
-
-    private void OnTriggerEnter2D(Collider2D boxCollider)
-    {
-        ItemWorld itemWorld = boxCollider.GetComponent<ItemWorld>();
-        if (itemWorld != null)
-        {
-            //Touch item
-            inventory.AddItem(itemWorld.GetItem());
-            itemWorld.DestroySelf();
-        }
-    }
 
     IEnumerator AutoSave()
     {
@@ -61,4 +39,6 @@ public class Player : MonoBehaviour
             transform.position = position;
         }
     }
+
+    
 }
