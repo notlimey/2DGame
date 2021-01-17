@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     public InputField SaveName;
     public string[] SaveFiles;
     public bool SaveExists = false;
+    public float[] spawnPos;
 
     // SaveName Errors
     public GameObject ContainsBackSlash;
@@ -49,7 +50,7 @@ public class GameManager : MonoBehaviour
             SaveExistsImage();
             return;
         }
-        SaveSystem.SavePlayer(new PlayerProfile { PlayerName = SaveName.text }, false);
+        SaveSystem.SavePlayer(new PlayerProfile { PlayerName = SaveName.text}, false);
         NewGame.SetActive(false);
         LoadGame.SetActive(false);
         SelectOrCreate.SetActive(true);
