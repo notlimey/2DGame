@@ -41,10 +41,11 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "Item")
         {
+            Debug.Log("Item added");
             GameObject itemPickedUp = other.gameObject;
             Item item = itemPickedUp.GetComponent<Item>();
 
@@ -58,8 +59,6 @@ public class Inventory : MonoBehaviour
         {
             if (slot[i].GetComponent<Slot>().empty)
             {
-                Debug.Log("Added");
-                //add item to slot
                 itemObject.GetComponent<Item>().pickedUp = true;
 
                 slot[i].GetComponent<Slot>().item = itemObject;

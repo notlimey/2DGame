@@ -56,7 +56,7 @@ public class PauseManager : MonoBehaviour
     public void Resume()
     {
         PausePanel.SetActive(false);
-        Time.timeScale = 1f;
+        Time.timeScale = 1f; 
     }
 
     //The float array which the player position is saved as
