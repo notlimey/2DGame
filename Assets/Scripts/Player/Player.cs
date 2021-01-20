@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+
+
     void Start()
     {
         LoadMyPlayer();
@@ -11,6 +13,7 @@ public class Player : MonoBehaviour
     }
 
     float[] PlayerPosition = new float[3];
+
 
     IEnumerator AutoSave()
     {

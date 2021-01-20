@@ -1,80 +1,58 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
-    private bool inventoryEnabled;
-    public GameObject inventory;
 
-    private int allSlots;
-    private int enableSlots;
-    private GameObject[] slot;
+    #region Singelton
 
-    public GameObject slotHolder;
+    public static Inventory instance;
 
-
-    void Start()
+    private void Awake()
     {
-        allSlots = 32;
-        slot = new GameObject[allSlots];
-
-        for (int i = 0; i < allSlots; i++)
+        if(instance != null)
         {
-            slot[i] = slotHolder.transform.GetChild(i).gameObject;
-
-            if (slot[i].GetComponent<Slot>().item == null)
-                slot[i].GetComponent<Slot>().empty = true;
-        }
-    }
-
-    void Update()
-    {
-        if (Input.GetButtonDown("Inventory"))
-            inventoryEnabled = !inventoryEnabled;
-
-        if (inventoryEnabled == true)
-        {
-            inventory.SetActive(true);
-        }
-        else
-        {
-            inventory.SetActive(false);
-        }
-    }
-
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.tag == "Item")
-        {
-            Debug.Log("Item added");
-            GameObject itemPickedUp = other.gameObject;
-            Item item = itemPickedUp.GetComponent<Item>();
-
-            AddItem(itemPickedUp, item.ID, item.type, item.description, item.icon);
-        }
-    }
-
-    void AddItem(GameObject itemObject, int itemID, string itemType, string itemDescription, Sprite itemIcon)
-    {
-        for (int i = 0; i < allSlots; i++)
-        {
-            if (slot[i].GetComponent<Slot>().empty)
-            {
-                itemObject.GetComponent<Item>().pickedUp = true;
-
-                slot[i].GetComponent<Slot>().item = itemObject;
-                slot[i].GetComponent<Slot>().icon = itemIcon;
-                slot[i].GetComponent<Slot>().type = itemType;
-                slot[i].GetComponent<Slot>().ID = itemID;
-                slot[i].GetComponent<Slot>().description = itemDescription;
-
-                itemObject.transform.parent = slot[i].transform;
-                itemObject.SetActive(false);
-
-                slot[i].GetComponent<Slot>().UpdateSlot();
-                slot[i].GetComponent<Slot>().empty = false;
-            }
-
+            Debug.LogWarning("More than one instance of Inventory found!!");
             return;
         }
+
+        instance = this;
+    }
+
+    #endregion
+
+    public delegate void OnItemChanged();
+    public OnItemChanged onItemChangedCallBack;
+
+
+    public int space = 16;
+
+    public List<Item> items = new List<Item>();
+
+    public bool Add (Item item)
+    {
+        if(!item.isDefaultItem)
+        {
+            if(items.Count >= space)
+            {
+                return false;
+            }
+
+            items.Add(item);
+
+            if(onItemChangedCallBack != null)
+                onItemChangedCallBack.Invoke();
+        }
+
+        return true;
+    }
+
+    public void Remove(Item item)
+    {
+        items.Remove(item);
+
+        if (onItemChangedCallBack != null)
+            onItemChangedCallBack.Invoke();
     }
 }
