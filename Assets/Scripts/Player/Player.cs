@@ -23,7 +23,7 @@ public class Player : MonoBehaviour
             PlayerPosition[0] = transform.position.x;
             PlayerPosition[1] = transform.position.y;
             PlayerPosition[2] = transform.position.z;
-            SaveSystem.SavePlayer(new PlayerProfile { PlayerName = SelectedProfile.Username, Position = PlayerPosition}, false);
+            SaveSystem.SavePlayer(new PlayerProfile { PlayerName = SelectedProfile.Username, Position = PlayerPosition }, false);
         }
     }
 

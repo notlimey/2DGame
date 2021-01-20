@@ -14,4 +14,9 @@ public class Onhover : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         button.transform.localScale = new Vector3(1f, 1f, 1f);
     }
+
+    public void leavePanel()
+    {
+        button.transform.localScale = new Vector3(1f, 1f, 1f);
+    }
 }

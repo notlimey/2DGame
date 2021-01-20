@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class Inventory : MonoBehaviour
 {
 
@@ -39,7 +40,26 @@ public class Inventory : MonoBehaviour
                 return false;
             }
 
-            items.Add(item);
+            if (item.maxStack == 1)
+            {
+                items.Add(item);
+            }
+            else
+            {
+                //bool itemAlreadyInInventory = false;
+                //foreach (Item inventoryItem in items)
+                //{
+                //    if (inventoryItem.name == item.name)
+                //    {
+                //        inventoryItem.amount += item.amount;
+                //        itemAlreadyInInventory = true;
+                //    }
+                //}
+                
+                items.Add(item);
+            }
+            
+
 
             if(onItemChangedCallBack != null)
                 onItemChangedCallBack.Invoke();
