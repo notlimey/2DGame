@@ -22,12 +22,40 @@ public class Inventory : ScriptableObject, IItemContainer
 
     public void Swap(int indexOne, int indexTwo)
     {
-        throw new System.NotImplementedException();
+        ItemSlot firstSlot = itemSlots[indexOne];
+        ItemSlot secondSlot = itemSlots[indexTwo];
+
+        if (firstSlot == secondSlot)
+            return;
+
+        if (secondSlot.item != null)
+        {
+            if (firstSlot.item == secondSlot.item)
+            {
+                int secondSlotRemainingSpace = secondSlot.item.MaxStack - secondSlot.quantity;
+                if (firstSlot.quantity <= secondSlotRemainingSpace)
+                {
+                    secondSlot.quantity += firstSlot.quantity;
+
+                    itemSlots[indexOne]
+                }
+
+
+            }
+        }
     }
 
     public bool HasItem(InventoryItem item)
     {
-        throw new System.NotImplementedException();
+        foreach (ItemSlot itemSlot in itemSlots)
+        {
+            if(itemSlot.item == null) { continue; }
+            if(itemSlot.item != item) { continue; }
+
+            return true;
+        }
+
+        return false;
     }
 
     public int GetTotalQuantity(InventoryItem item)
