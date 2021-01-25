@@ -8,6 +8,5 @@ namespace Assets.Scripts.Saving_and_Loading
     {
         public float[] Position;
         public string PlayerName;
-        public List<Item> items;
     }
 }
