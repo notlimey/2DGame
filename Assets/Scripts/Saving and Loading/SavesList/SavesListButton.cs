@@ -1,12 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class SavesListButton : MonoBehaviour
 {
-    
     public void SetText(string textString)
     {
         gameObject.GetComponentInChildren<Text>().text = textString;
@@ -18,8 +15,6 @@ public class SavesListButton : MonoBehaviour
         SelectedProfile.Username = Name;
         string path = Application.persistentDataPath + "/saves/" + Name + "/" + Name + ".dat";
         SaveSystem.LoadPlayer(path);
-        SceneManager.LoadSceneAsync(2);
+        SceneManager.LoadSceneAsync(1);
     }
-
-
 }

@@ -30,7 +30,7 @@ public class PlayerMovement : MonoBehaviour
         change = Vector3.zero;
         change.x = Input.GetAxisRaw("Horizontal");
         change.y = Input.GetAxisRaw("Vertical");
-        if (Input.GetButtonDown("attack") && CurrentState != PlayerState.attack && !PauseManager.GameIsPaused)
+        if (Input.GetButtonDown("attack") && CurrentState != PlayerState.attack && !PauseManager._gameIsPaused)
         {
             StartCoroutine(AttackCo());
         }
@@ -70,6 +70,5 @@ public class PlayerMovement : MonoBehaviour
         change.Normalize();
         myRigidbody.MovePosition(
             transform.position + change * Speed * Time.deltaTime);
-
     }
 }

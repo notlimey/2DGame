@@ -6,7 +6,7 @@ public class PauseManager : MonoBehaviour
 {
 
     //Is game paused?
-    public static bool GameIsPaused;
+    public static bool _gameIsPaused;
 
     //The pause panel which gets activated/deactivated
     public GameObject PausePanel;
@@ -14,14 +14,9 @@ public class PauseManager : MonoBehaviour
     //For saving the player on leave
     public GameObject player;
 
-    //For activation and deactivation of the HUD
-    public GameObject HUD;
-
-    // Start is called before the first frame update
     void Start()
     {
-        GameIsPaused = false;
-        HUD.SetActive(true);
+        _gameIsPaused = false;
     }
 
     // Update is called once per frame
@@ -36,17 +31,15 @@ public class PauseManager : MonoBehaviour
     //Changing if the game is paused or not
     public void ChangePause()
     {
-        GameIsPaused = !GameIsPaused;
-        if (GameIsPaused)
+        _gameIsPaused = !_gameIsPaused;
+        if (_gameIsPaused)
         {
             PausePanel.SetActive(true);
-            HUD.SetActive(false);
             Time.timeScale = 0f;
         }
         else
         {
             PausePanel.SetActive(false);
-            HUD.SetActive(true);
             Time.timeScale = 1f;
         }
     }

@@ -11,7 +11,7 @@ public class Sign : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Space) && PlayerInRangeSign && !PauseManager.GameIsPaused)
+        if(Input.GetKeyDown(KeyCode.Space) && PlayerInRangeSign && !PauseManager._gameIsPaused)
         {
             if(DialogBoxSign.activeInHierarchy)
             {
@@ -22,7 +22,7 @@ public class Sign : MonoBehaviour
                 DialogTextSign.text = Dialog;
             }
         }
-        if(PauseManager.GameIsPaused)
+        if(PauseManager._gameIsPaused)
         {
             DialogBoxSign.SetActive(false);
         }
