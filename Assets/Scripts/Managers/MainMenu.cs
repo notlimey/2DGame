@@ -114,25 +114,23 @@ public class MainMenu : MonoBehaviour
         if (SaveName.text.Contains("\\"))
         {
             ContainsBackSlash.SetActive(true);
-            StartCoroutine(ReloadAfterSec());
             return;
 
         }
         if (SaveName.text.Contains("/"))
         {
             Slash.SetActive(true);
-            StartCoroutine(ReloadAfterSec());
             return;
         }
         if (Directory.Exists(Application.persistentDataPath + "/saves/" + SaveName.text))
         {
             SaveExists = true;
             SaveExistsImage();
-            StartCoroutine(ReloadAfterSec());
             return;
         }
 
         SaveSystem.SavePlayer(new PlayerProfile { PlayerName = SaveName.text }, false);
+        BackToMain();
     }
 
     List<PlayerProfile> AllSaves = new List<PlayerProfile>();
@@ -185,16 +183,10 @@ public class MainMenu : MonoBehaviour
         }
     }
 
-    // Reload after seconds
-    IEnumerator ReloadAfterSec()
-    {
-        yield return new WaitForSeconds(5);
-        Reload();
-    }
-
     public void Reload()
     {
         SaveExists = false;
+        _saveExists.SetActive(false);
         ContainsBackSlash.SetActive(false);
         Slash.SetActive(false);
         SaveName.text = "";
