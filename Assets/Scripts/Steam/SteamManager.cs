@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class SteamManager : MonoBehaviour
 {
+    public static string SteamPath;
     // Start is called before the first frame update
    private void Awake()
     {
         try
         {
             Steamworks.SteamClient.Init(1541950);
+            SteamPath = Steamworks.SteamApps.AppInstallDir(1541950);
         }
         catch
         {

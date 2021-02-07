@@ -13,7 +13,7 @@ public class SavesListButton : MonoBehaviour
     {
         string Name = gameObject.GetComponentInChildren<Text>().text;
         SelectedProfile.Username = Name;
-        string path = Application.persistentDataPath + "/saves/" + Name + "/" + Name + ".dat";
+        string path = SteamManager.SteamPath + "/saves/" + Name + "/" + Name + ".dat";
         SaveSystem.LoadPlayer(path);
         SceneManager.LoadSceneAsync(1);
     }

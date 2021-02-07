@@ -122,7 +122,7 @@ public class MainMenu : MonoBehaviour
             Slash.SetActive(true);
             return;
         }
-        if (Directory.Exists(Application.persistentDataPath + "/saves/" + SaveName.text))
+        if (Directory.Exists(SteamManager.SteamPath + "/saves/" + SaveName.text))
         {
             SaveExists = true;
             SaveExistsImage();
@@ -140,12 +140,12 @@ public class MainMenu : MonoBehaviour
     public void Load()
     {
         AllSaves.Clear();
-        if (!Directory.Exists(Application.persistentDataPath + "/saves/"))
+        if (!Directory.Exists(SteamManager.SteamPath + "/saves/"))
         {
-            Directory.CreateDirectory(Application.persistentDataPath + "/saves/");
+            Directory.CreateDirectory(SteamManager.SteamPath + "/saves/");
         }
 
-        SaveFiles = Directory.GetDirectories(Application.persistentDataPath + "/saves/");
+        SaveFiles = Directory.GetDirectories(SteamManager.SteamPath + "/saves/");
         foreach (var path in SaveFiles)
         {
             var files = Directory.GetFiles(path);

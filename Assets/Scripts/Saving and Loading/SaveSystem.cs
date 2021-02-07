@@ -8,9 +8,9 @@ public static class SaveSystem
 
     public static void SavePlayer(PlayerProfile player, bool saveExists)
     {
-        if (!Directory.Exists(Application.persistentDataPath + "/saves/"))
+        if (!Directory.Exists(SteamManager.SteamPath + "/saves/"))
         {
-            Directory.CreateDirectory(Application.persistentDataPath + "/saves/");
+            Directory.CreateDirectory(SteamManager.SteamPath + "/saves/");
         }
         if (saveExists == true)
         {
@@ -19,13 +19,13 @@ public static class SaveSystem
         }
         else
         {
-            Directory.CreateDirectory(Application.persistentDataPath + "/saves/" + player.PlayerName + "/");
+            Directory.CreateDirectory(SteamManager.SteamPath + "/saves/" + player.PlayerName + "/");
         }
 
         
 
         BinaryFormatter formatter = new BinaryFormatter();
-        string path = Application.persistentDataPath + "/saves/" + player.PlayerName + "/" + player.PlayerName + ".dat";
+        string path = SteamManager.SteamPath + "/saves/" + player.PlayerName + "/" + player.PlayerName + ".dat";
         FileStream stream = new FileStream(path, FileMode.Create);
 
         formatter.Serialize(stream, player);
@@ -69,7 +69,7 @@ public static class SaveSystem
     public static void SaveSettings(Settings settings)
     {
         BinaryFormatter formatter = new BinaryFormatter();
-        string path = Application.persistentDataPath + "/settings.dat";
+        string path = SteamManager.SteamPath + "/settings.dat";
         FileStream stream = new FileStream(path, FileMode.Create);
 
         formatter.Serialize(stream, settings);
@@ -78,7 +78,7 @@ public static class SaveSystem
 
     public static Settings LoadSettings()
     {
-        string path = Application.persistentDataPath + "/settings.dat";
+        string path = SteamManager.SteamPath + "/settings.dat";
         if (!File.Exists(path))
         {
             return null;
