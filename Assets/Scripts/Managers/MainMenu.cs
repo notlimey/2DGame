@@ -18,10 +18,11 @@ public class MainMenu : MonoBehaviour
     public GameObject optionsPanel;
     public GameObject newGamePanel;
     public GameObject loadGamePanel;
-    public GameObject Slider;
 
     
     public InputField SaveName;
+    public Toggle CheatsActivated;
+    public bool CheatsActive;
 
     // SaveFiles that exists
     private string[] SaveFiles;
@@ -42,13 +43,7 @@ public class MainMenu : MonoBehaviour
     private GameObject _buttonTemplate;
 
     #endregion
-
-    private IEnumerator WaitForMainMenu(float seconds)
-    {
-        yield return new WaitForSeconds(seconds);
-        Slider.SetActive(false);
-        mainMenu.SetActive(true);
-    }
+    
 
     void Start()
     {
@@ -56,7 +51,6 @@ public class MainMenu : MonoBehaviour
         optionsPanel.SetActive(false);
         newGamePanel.SetActive(false);
         loadGamePanel.SetActive(false);
-        Slider.SetActive(false);
     }
 
     #region Canvases
@@ -64,18 +58,12 @@ public class MainMenu : MonoBehaviour
     {
         newGamePanel.SetActive(true);
         mainMenu.SetActive(false);
-
-        Slider.SetActive(true);
-        MainCanvas.GetComponent<Animation>().Play("SlideIntoPanel");
     }
 
     public void LoadGame()
     {
         loadGamePanel.SetActive(true);
         mainMenu.SetActive(false);
-
-        Slider.SetActive(true);
-        MainCanvas.GetComponent<Animation>().Play("SlideIntoPanel");
         Load();
     }
 
@@ -83,9 +71,6 @@ public class MainMenu : MonoBehaviour
     {
         optionsPanel.SetActive(true);
         mainMenu.SetActive(false);
-        
-        Slider.SetActive(true);
-        MainCanvas.GetComponent<Animation>().Play("SlideIntoPanel");
     }
 
     public void BackToMain()
@@ -93,10 +78,7 @@ public class MainMenu : MonoBehaviour
         optionsPanel.SetActive(false);
         loadGamePanel.SetActive(false);
         newGamePanel.SetActive(false);
-
-
-        MainCanvas.GetComponent<Animation>().Play("SlideBackPanel");
-        StartCoroutine(WaitForMainMenu(1));
+        mainMenu.SetActive(true);
     }
 
     public void quitApplication()
@@ -106,6 +88,11 @@ public class MainMenu : MonoBehaviour
 
     #endregion
 
+    public void ChangeValue()
+    {
+        CheatsActive = CheatsActivated.isOn;
+        Debug.Log(CheatsActive);
+    }
 
     // Load and new game script
 
@@ -129,7 +116,7 @@ public class MainMenu : MonoBehaviour
             return;
         }
 
-        SaveSystem.SavePlayer(new PlayerProfile { PlayerName = SaveName.text }, false);
+        SaveSystem.SavePlayer(new PlayerProfile { PlayerName = SaveName.text, CheatCommands = CheatsActive }, false);
         BackToMain();
     }
 

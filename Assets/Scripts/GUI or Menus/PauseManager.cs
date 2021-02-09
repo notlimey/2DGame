@@ -11,6 +11,8 @@ public class PauseManager : MonoBehaviour
     //The pause panel which gets activated/deactivated
     public GameObject PausePanel;
 
+    private PlayerProfile profile;
+
     //For saving the player on leave
     public GameObject player;
 
@@ -24,6 +26,7 @@ public class PauseManager : MonoBehaviour
     {
         if(Input.GetButtonDown("pause"))
         {
+            Debug.Log(profile.CheatCommands);
             ChangePause();
         }
     }

@@ -12,10 +12,13 @@ public class SettingsMenu : MonoBehaviour
     public Toggle fullscreenToggle;
     public Slider volumeSlider;
     public TMP_Dropdown textureQualityDropdown;
+    public TMP_Text CurrentQuality;
 
     public string[] qualitySettings;
 
     public Settings gameSettings;
+
+
 
     void Start()
     {
@@ -23,7 +26,8 @@ public class SettingsMenu : MonoBehaviour
         fullscreenToggle.onValueChanged.AddListener(delegate { OnFullscreenToggle(); });
         volumeSlider.onValueChanged.AddListener(delegate { OnVolumeChange(); });
         textureQualityDropdown.onValueChanged.AddListener(delegate { OnTextureQualityChange(); });
-        
+
+        Resolution();
         LoadSettings();
     }
 
@@ -53,6 +57,11 @@ public class SettingsMenu : MonoBehaviour
     {
         SaveSettings();
         Debug.Log(textureQualityDropdown.itemText);
+    }
+
+    public void Resolution()
+    {
+        Debug.Log(Screen.currentResolution);
     }
 
     public void LoadSettings()
