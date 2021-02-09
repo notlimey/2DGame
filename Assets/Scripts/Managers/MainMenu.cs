@@ -22,7 +22,6 @@ public class MainMenu : MonoBehaviour
     
     public InputField SaveName;
     public Toggle CheatsActivated;
-    public bool CheatsActive;
 
     // SaveFiles that exists
     private string[] SaveFiles;
@@ -58,6 +57,7 @@ public class MainMenu : MonoBehaviour
     {
         newGamePanel.SetActive(true);
         mainMenu.SetActive(false);
+        CheatsActivated.isOn = false;
     }
 
     public void LoadGame()
@@ -88,12 +88,6 @@ public class MainMenu : MonoBehaviour
 
     #endregion
 
-    public void ChangeValue()
-    {
-        CheatsActive = CheatsActivated.isOn;
-        Debug.Log(CheatsActive);
-    }
-
     // Load and new game script
 
     public void CreateNewGame()
@@ -116,7 +110,7 @@ public class MainMenu : MonoBehaviour
             return;
         }
 
-        SaveSystem.SavePlayer(new PlayerProfile { PlayerName = SaveName.text, CheatCommands = CheatsActive }, false);
+        SaveSystem.SavePlayer(new PlayerProfile { PlayerName = SaveName.text, DevConsole = CheatsActivated }, false);
         BackToMain();
     }
 

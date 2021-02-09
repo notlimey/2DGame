@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts.Saving_and_Loading;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -26,7 +27,6 @@ public class PauseManager : MonoBehaviour
     {
         if(Input.GetButtonDown("pause"))
         {
-            Debug.Log(profile.CheatCommands);
             ChangePause();
         }
     }

@@ -12,6 +12,7 @@ public class SteamManager : MonoBehaviour
         {
             Steamworks.SteamClient.Init(1541950);
             SteamPath = Steamworks.SteamApps.AppInstallDir(1541950);
+            Debug.Log(SteamPath);
         }
         catch
         {
