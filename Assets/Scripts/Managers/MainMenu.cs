@@ -110,7 +110,7 @@ public class MainMenu : MonoBehaviour
             return;
         }
 
-        SaveSystem.SavePlayer(new PlayerProfile { PlayerName = SaveName.text, DevConsole = CheatsActivated }, false);
+        SaveSystem.SavePlayer(new PlayerProfile { PlayerName = SaveName.text }, false);
         BackToMain();
     }
 

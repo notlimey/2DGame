@@ -30,8 +30,6 @@ public class Player : MonoBehaviour
     {
         string path = Application.persistentDataPath + "/saves/" + SelectedProfile.Username + "/" + SelectedProfile.Username + ".dat";
         PlayerProfile data = SaveSystem.LoadPlayer(path);
-        Debug.Log(data.DevConsole);
-        Debug.Log(_cheatsActive);
 
         if (data.Position != null)
         {
